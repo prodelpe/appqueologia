@@ -12,10 +12,10 @@ use Illuminate\Support\Str;
 
 class PdfUeController extends Controller {
 
-    public function index($ue_id) {
+    public function index($excavacio_id, $ue_id) {
 
         $ue = UE::findOrFail($ue_id);
-        $excavacio = Excavacio::findOrFail($ue->excavacio_id);
+        $excavacio = Excavacio::findOrFail($excavacio_id);
         $tipus_relacions = TipusRelacio::all();
 
         $mpdf = new \Mpdf\Mpdf([
