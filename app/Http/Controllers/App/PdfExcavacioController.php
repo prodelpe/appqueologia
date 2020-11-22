@@ -94,13 +94,15 @@ class PdfExcavacioController extends Controller {
             //Número de pàgina
             $mpdf->SetFontSize(10);
             $mpdf->SetFont('FreeSans');
-            
-            $mpdf->writeText(100, 285, strval($key+1));
+
+            $mpdf->writeText(100, 285, strval($key + 1));
 
             //WATERMARK
-            //$mpdf->SetWatermarkText('TEST');
-            //$mpdf->showWatermarkText = true;
-            //
+            if (config('app.demo')) {
+                $mpdf->SetWatermarkText('DEMO');
+                $mpdf->showWatermarkText = true;
+            }
+            
             //METADATA
             $mpdf->SetTitle(Str::slug($excavacio->nom . ' - ' . $ue->codi));
             $mpdf->SetAuthor('appQueologia');
