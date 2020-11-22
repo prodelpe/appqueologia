@@ -39,7 +39,7 @@ class UEController extends Controller {
         $sectors = UE::all()->where('excavacio_id', $excavacio_id)->groupBy('sector')->keys();
 
         if (config('app.demo')) {
-            if ($ues->count() >= 5) {
+            if ($ues->count() >= 15) {
                 $errors = new MessageBag();
                 $errors->add('demo_error', __('El mode DEMO només permet 5 ues per excavació'));
                 return redirect()
