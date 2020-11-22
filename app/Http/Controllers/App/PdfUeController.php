@@ -74,25 +74,27 @@ class PdfUeController extends Controller {
                     ->implode(', ');
             $mpdf->writeText(45, 110 + ($key * 8.45), strval($relacions));
         }
-        
+
         //Interpretació
         $mpdf->WriteFixedPosHTML(strval($ue->interpretacio), 25, 214.5, 162, 15, 'auto');
         $mpdf->SetFontSize(10);
         $mpdf->SetFont('FreeSans');
-        
+
         //Cronologia
         $mpdf->writeText(45, 237, strval($ue->cronologia));
-        
+
         //Criteris datació
         $mpdf->writeText(45, 246, strval($ue->criteris_datacio));
-        
+
         //Observacions
         $mpdf->WriteFixedPosHTML(strval($ue->observacions), 25, 260, 162, 15, 'auto');
-
+       
         //WATERMARK
-        //$mpdf->SetWatermarkText('TEST');
-        //$mpdf->showWatermarkText = true;
-        //
+        if (config('app.demo')) {
+            $mpdf->SetWatermarkText('DEMO');
+            $mpdf->showWatermarkText = true;
+        }
+
         //METADATA
         $mpdf->SetTitle(Str::slug($excavacio->nom . ' - ' . $ue->codi));
         $mpdf->SetAuthor('appQueologia');

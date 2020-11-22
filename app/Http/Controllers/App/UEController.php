@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\MessageBag;
 
 class UEController extends Controller {
 
@@ -37,6 +38,16 @@ class UEController extends Controller {
         $ues = UE::all()->where('excavacio_id', $excavacio_id);
         $sectors = UE::all()->where('excavacio_id', $excavacio_id)->groupBy('sector')->keys();
 
+        if (config('app.demo')) {
+            if ($ues->count() >= 5) {
+                $errors = new MessageBag();
+                $errors->add('demo_error', __('El mode DEMO només permet 5 ues per excavació'));
+                return redirect()
+                                ->route('app.ue.all', $excavacio_id)
+                                ->withErrors($errors);
+            }
+        }
+
         return view('app.ue.create', compact('excavacio', 'tipus_relacions', 'ues', 'sectors'));
     }
 
@@ -60,9 +71,10 @@ class UEController extends Controller {
         $ue_creada = UE::create([
                     'codi' => $request->codi,
                     'excavacio_id' => $excavacio_id,
+                    'sector' => $request->sector_codi,
                     'definicio' => $request->definicio,
                     'descripcio' => $request->descripcio,
-                    'intrerpretacio' => $request->interpretacio,
+                    'interpretacio' => $request->interpretacio,
                     'cronologia' => $request->cronologia,
                     'criteris_datacio' => $request->criteris_datacio,
                     'observacions' => $request->observacions,
@@ -124,7 +136,7 @@ class UEController extends Controller {
      * @param type $id
      * @return type
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $excavacio_id, $id) {
 
         $validator = $this->custom_validate_update($request, $id);
 
@@ -138,10 +150,11 @@ class UEController extends Controller {
 
         $ue->update([
             'codi' => $request->codi,
-            'sector_id' => $request->sector_id,
+            'excavacio_id' => $excavacio_id,
+            'sector' => $request->sector_codi,
             'definicio' => $request->definicio,
             'descripcio' => $request->descripcio,
-            'intrerpretacio' => $request->interpretacio,
+            'interpretacio' => $request->interpretacio,
             'cronologia' => $request->cronologia,
             'criteris_datacio' => $request->criteris_datacio,
             'observacions' => $request->observacions,
@@ -175,7 +188,7 @@ class UEController extends Controller {
         }
 
         return redirect()
-                        ->route('app.ue.all', $request->excavacio_id)
+                        ->route('app.ue.all', $excavacio_id)
                         ->with('message', __('Unitat editada'));
     }
 

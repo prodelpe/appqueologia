@@ -31,7 +31,7 @@
     <div class="col-md-5">
         <div class="form-group d-none d-md-block">
             <label>{{ __('Zona / Sector / Àmbit') }}</label>
-            <input type="text" class="form-control" id="sector_codi" value="{{ isset($ue) ? $ue->sector : '' }}"/>
+            <input type="text" class="form-control" id="sector_codi" name="sector_codi" value="{{ isset($ue) ? $ue->sector : '' }}"/>
         </div>
     </div>
     <div class="col-md-5">
@@ -85,8 +85,8 @@
                 <div class="col-md-8 col-4">
                     <select class="form-control" name="ue_desti_id[]" v-model="input.ue_desti_id">
                         <option value=""></option>
-                        @foreach($ues as $ue)
-                        <option value="{{ $ue->id }}">{{ $ue->codi }}</option>
+                        @foreach($ues as $ue_in_loop)
+                        <option value="{{ $ue_in_loop->id }}">{{ $ue_in_loop->codi }}</option>
                         @endforeach
                     </select>
                 </div>

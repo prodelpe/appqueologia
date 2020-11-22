@@ -12,6 +12,7 @@ class UE extends Model {
     protected $fillable = [
         'codi', 
         'excavacio_id', 
+        'sector',
         'definicio', 
         'descripcio', 
         'interpretacio', 
