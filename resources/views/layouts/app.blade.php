@@ -32,7 +32,7 @@
     <link href="{{ asset('css/autocomplete.css') }}" rel="stylesheet" type="text/css"/>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQ31Y5LH3Y"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-26XF8JW5V8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -42,7 +42,7 @@
 
         gtag('js', new Date());
 
-        gtag('config', 'G-GQ31Y5LH3Y');
+        gtag('config', 'G-26XF8JW5V8');
     </script>
 
     <script>
