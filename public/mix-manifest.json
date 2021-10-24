@@ -1,6 +1,4 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/js/autocomplete.js": "/js/autocomplete.js",
-    "/css/autocomplete.css": "/css/autocomplete.css"
+    "/css/app.css": "/css/app.css"
 }
